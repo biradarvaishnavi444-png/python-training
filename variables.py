@@ -1,4 +1,8 @@
-a=input("Enter a  number")
-b=input("Enter another number")
-sum = int(a)+int(b)
-print("The sum of ",a ,"and",b,"is",sum)
+# Variables
+student_name = "Vaishnavi"
+age = 18
+marks = 85
+
+print("Student Name:", student_name)
+print("Age:", age)
+print("Marks:", marks)

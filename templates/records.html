@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Visitor Records</h2>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Room No</th>
+        <th>Entry Time</th>
+        <th>Status</th>
+    </tr>
+
+    {% for visitor in visitors %}
+    <tr>
+        <td>{{ visitor.id }}</td>
+        <td>{{ visitor.name }}</td>
+        <td>{{ visitor.room }}</td>
+        <td>{{ visitor.entry }}</td>
+        <td>{{ visitor.status }}</td>
+    </tr>
+    {% endfor %}
+
+
+{% endblock %}
