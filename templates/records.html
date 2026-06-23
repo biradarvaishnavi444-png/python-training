@@ -1,27 +1,54 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% block title %}Records{% endblock %}
 
 {% block content %}
 
-<h2>Visitor Records</h2>
+<h2 class="mb-3">Visitor Records</h2>
 
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Room No</th>
-        <th>Entry Time</th>
-        <th>Status</th>
-    </tr>
+<table class="table table-bordered table-striped table-hover shadow-sm">
+
+    <thead class="table table-success table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Visitor Name </th>
+            <th>Student Name </th>
+            <th>Room No </th>
+            <th>Purpose</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
 
     {% for visitor in visitors %}
+
     <tr>
         <td>{{ visitor.id }}</td>
-        <td>{{ visitor.name }}</td>
-        <td>{{ visitor.room }}</td>
-        <td>{{ visitor.entry }}</td>
-        <td>{{ visitor.status }}</td>
+        <td>{{ visitor.visitor_name }}</td>
+        <td>{{ visitor.student_name }}</td>
+        <td>{{ visitor.room_no }}</td>
+        <td>{{ visitor.purpose }}</td>
+        <td>
+            <a href="/view/{{ visitor.id }}"
+               class="btn btn-sm btn-primary">
+                View
+             </a>
+             <a href="/edit_visitor/{{ visitor.id }}"
+               class="btn btn-sm  btn-warning">
+                Edit
+             </a>
+             <a href="/delete/{{ visitor.id }}"
+               class="btn btn-sm btn-danger">
+                Delete
+            </a>
+        </td>
     </tr>
+
     {% endfor %}
 
+    </tbody>
+
+</table>
 
 {% endblock %}
