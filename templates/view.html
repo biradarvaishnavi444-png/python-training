@@ -1,0 +1,35 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Visitor Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="card shadow-lg mx-auto boarder-0 " style="max-width: 450px;
+    border-radius:15px;
+    overflow:hidden;">
+    <div  class ="card-header text-white "
+    style ="background-color:rgb(127, 255, 138)">
+            <h3 class ="mb-0">📋 Visitor Details</h3>
+        </div>
+
+        <div class="card-body" style ="background-color:#E8F8F5;">
+            <p class ="border-bottom pb-2"><strong> 🆔ID:</strong> {{ visitor['id'] }}</p>
+            <p class ="border-bottom pb-2"><strong> 👨‍💼Visitor Name:</strong> {{ visitor['visitor_name'] }}</p>
+            <p class ="border-bottom pb-2"><strong> 🎓Student Name:</strong> {{ visitor['student_name'] }}</p>
+            <p class ="border-bottom pb-2"><strong> 🏠Room No:</strong> {{ visitor['room_no'] }}</p>
+            <p class ="border-bottom pb-2"><strong> 🎯Purpose:</strong> {{ visitor['purpose'] }}</p>
+        </div>
+
+        <div class="card-footerbg-white ">
+            <a href="/records" class="btn btn-info">⬅️ Back to 📋 Records</a>
+            <a href="/filter" class="btn btn-warning">⬅️ Back to 🔍 Filter</a>
+        </div>
+    </div>
+    </div>
+</div>
+
+</body>
+</html>
