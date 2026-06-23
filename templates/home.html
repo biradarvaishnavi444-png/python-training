@@ -1,8 +1,41 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
 
 {% block content %}
-<h2>Welcome</h2>
-<p>Welcome to Hostel Visitor Log System.</p>
-<p>This project helps manage visitor entry and exit records in a hostel It helps wardens maintain visitor information in an organized and security in hostel .</p>
+
+<h2 class="mb-4">Dashboard</h2>
+
+<div class="card shadow">
+    <div class="card-body">
+        <h4> 👥Total Visitors: {{ visitors|length }}</h4>
+    </div>
+</div>
+<div class="card shadow mt-4">
+    <div class="card recent-card ">
+        <h3 class ="recent-title">Recent Visitors</h3>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th> Visitor Name</th>
+                    <th>Student Number</th>
+                    <th>Room No</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for visitor in visitors %}
+                <tr>
+                    <td>{{ visitor.visitor_name }}</td>
+                    <td>{{ visitor.student_name}}</td>
+                    <td>{{ visitor.room_no }}</td>
+                    <td>{{ visitor.purpose }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
 {% endblock %}
+
