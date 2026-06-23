@@ -1,0 +1,64 @@
+  {% extends "base.html" %}
+{% block title %}Add visitor — Hostel Visitor Log System {% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Add New Visitor</h5>
+            </div>
+
+            <div class="card-body p-4">
+                <form action="/add " method="POST">
+
+                    <div class="mb-3">
+                        <label class="form-label">Visitor Name</label>
+                        <input required
+                               name="visitor_name"
+                               class="form-control"
+                               placeholder="Enter Visitor Name"
+                               type="text">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Student Name </label>
+                        <input required
+                               name="student_name"
+                               class="form-control"
+                               placeholder="Enter Student Name"
+                               type="text">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Room No </label>
+                        <input required
+                               name="room_no"
+                               class="form-control"
+                               placeholder="Enter Room No"
+                               type="number">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Purpose</label>
+                        <input required
+                               name="purpose"
+                               class="form-control"
+                               placeholder="Enter Purpose"
+                               type="text">
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-dark">
+                            Add Visitor
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
