@@ -7,6 +7,18 @@
 <h2 class="mb-3">Visitor Records</h2>
 
 <table class="table table-bordered table-striped table-hover shadow-sm">
+   <!-- Live Search -->
+
+<div class ="mb-3">
+    <input type ="text"
+    id ="searchInput"
+    class ="form-control
+    form-control-lg"
+    placeholder="🔍Type to search visitors by name...">
+    <div id ="resultInfo"
+    class="text-muted small mt-1"></div>
+</div>
+ 
 
     <thead class="table table-success table-striped">
         <tr>
@@ -34,6 +46,7 @@
                class="btn btn-sm btn-primary">
                 View
              </a>
+             {% if session.role == 'admin' %}
              <a href="/edit_visitor/{{ visitor.id }}"
                class="btn btn-sm  btn-warning">
                 Edit
@@ -42,6 +55,7 @@
                class="btn btn-sm btn-danger">
                 Delete
             </a>
+            {% endif %}
         </td>
     </tr>
 
@@ -50,5 +64,22 @@
     </tbody>
 
 </table>
+<script>
+            const searchInput = document.getElementById('searchInput');
+            const allRows = document.querySelectorAll('#tableBody tr');
+            
+            searchInput.addEventListener('keyup', function() {
+                const query = this.value.toLowerCase();
+                allRows.forEach(function(row) {
+                    const name = row.dataset. name;
+
+                    if( name.includes(query)){
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });      
+        </script>
 
 {% endblock %}
