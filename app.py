@@ -1,16 +1,16 @@
-from typing import Any
-
-from flask import Flask, flash, render_template, request, redirect
+from flask import Flask, abort, redirect, render_template, request, flash, session , url_for
+from database import get_db, init_db
+from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 
 app = Flask(__name__)
-app.secret_key="hostel123"
+app.secret_key='Linkiwi2026'  # Necessary for flash messages
 
 # =========================
 # 1. DATABASE CONNECTION
 # =========================
 def get_db():
-    conn = sqlite3.connect("hostel.db")
+    conn = sqlite3.connect("Database.db")
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -59,6 +59,10 @@ def home():
 # =========================
 @app.route("/add", methods=["GET", "POST"])
 def add_visitor():
+    if session.get('role') !='admin':
+        flash("Admins only! You do not have permission ","danger")
+        return redirect('/')
+
 
     if request.method == "POST":
 
@@ -88,6 +92,9 @@ def add_visitor():
 # =========================
 @app.route("/delete/<int:id>")
 def delete_visitor(id):
+    if session.get('role') !='admin':
+        flash("Admins only! You do not have permission ","danger")
+        return redirect('/')
 
     conn = get_db()
 
@@ -105,6 +112,10 @@ def delete_visitor(id):
 # =========================
 @app.route("/edit_visitor/<int:id>", methods=["GET", "POST"])
 def edit_visitor(id):
+    if session.get('role') !='admin':
+        flash("Admins only! You do not have permission ","danger")
+        return redirect('/')
+
 
     conn = get_db()
 
@@ -164,6 +175,10 @@ def records():
     conn.close()
 
     return render_template("records.html", visitors=visitors)
+#  =========================
+#  9. SEARCH 
+#  =========================
+
 @app.route("/search")
 def search():
     #step 1 - get query from URL
@@ -183,6 +198,10 @@ def search():
         visitors = conn.execute('SELECT * FROM visitors ORDER BY id DESC').fetchall()
     conn.close()
     return render_template("search.html", visitors=visitors, query=q)
+
+# =======================
+# 10. FILTER
+# =======================
 
 @app.route('/filter')
 def filter_students():
@@ -221,13 +240,70 @@ def filter_students():
         purposes=purposes,
         selected_purpose=purpose
     )
-
+# =====================
+# 11. ABOUT 
+# =====================
 
 @app.route("/about")
 def about():
     return render_template("about.html ")
+
 # =========================
-# RUN
+# 12.REGISTER 
 # =========================
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username'].strip()
+        password = request.form['password']
+        
+        conn = get_db()
+        # Check if username already exists
+        existing = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+        if existing:
+            flash('Username already exists!', 'danger')
+            conn.close()
+            return render_template('register.html')
+        
+        hashed = generate_password_hash(password)
+        conn.execute('INSERT INTO users (username, password, role) VALUES (?, ?, ?)', (username, hashed, 'student'))
+        conn.commit()
+        conn.close()
+        flash('Registration successful! Please login.', 'success')
+        return redirect(('/login'))
+    
+    return render_template("register.html")
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username'].strip()
+        password = request.form['password']
+        
+        conn = get_db()
+        user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+        conn.close()
+        
+        if user and check_password_hash(user['password'], password):
+            session['username'] = username
+            session['role'] = user['role']
+            flash(f'Welcome {username}!', 'success')
+            return redirect(('/'))
+        else:
+            flash('Invalid username or password', 'danger')
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    
+    
+    session.pop('username', None)
+    session.pop('role', None)
+    flash('You have been logged out.', 'info')
+    return redirect(('/'))
+       
+
 if __name__ == "__main__":
-   app.run(debug=True)
+    init_db()  # Initialize the database
+    app.run(debug=True)
