@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Live Search </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body class="bg-light">
+        <div class="container mt-4"></div>
+            <h2 class ="fw-bold mb-4">Visitors Live Search Demo </h2>
+
+            <!-- Search input -->
+            <input type="text"
+            id ="searchInput"
+            class="form-control mb-3"
+            placeholder = "Type to search...">
+
+            <!-- Table -->
+            <table class ="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th> Visitor Name</th>
+                        <th>Student Name </th>
+                        <th>Room No </th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tableBody">
+                    <tr data- name ="komal">
+                        <!-- data-name - JS information  -->
+                        <td>Priya Patil</td>
+                        <td>Komal</td>
+                        <td>101</td>
+                        <td>Family Visit </td>
+                    </tr>
+                    <tr data- name ="madhav">
+                        <!-- data-name - JS information  -->
+                        <td>Rahul Sharma</td>
+                        <td>Madhav</td>
+                        <td>102</td>
+                        <td>Meet Student </td>
+                    </tr>
+                    <tr data-name ="sneha">
+                        <!-- data-name - JS information  -->
+                        <td>Nitin Desai</td>
+                        <td>Sneha</td>
+                        <td>103</td>
+                        <td>Job Interview</td>
+                    </tr>
+                    <tr data- name ="arohi">
+                        <!-- data-name - JS information  -->
+                        <td>Anika Sharma</td>
+                        <td>Arohi</td>
+                        <td>104</td>
+                        <td>Document Submission </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script>
+            const searchInput = document.getElementById('searchInput');
+            const allRows = document.querySelectorAll('#tableBody tr');
+            
+            searchInput.addEventListener('keyup', function() {
+                const query = this.value.toLowerCase();
+                allRows.forEach(function(row) {
+                    const  name = row.dataset. name;
+
+                    if( name.includes(query)){
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });      
+        </script>
+    </body>
+</html>
