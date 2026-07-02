@@ -246,7 +246,7 @@ def filter_students():
 
 @app.route("/about")
 def about():
-    return render_template("about.html ")
+    return render_template("about.html")
 
 # =========================
 # 12.REGISTER 
