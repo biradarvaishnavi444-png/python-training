@@ -303,7 +303,7 @@ def logout():
     flash('You have been logged out.', 'info')
     return redirect(('/'))
        
+init_db()  # Initialize the database
 
 if __name__ == "__main__":
-    init_db()  # Initialize the database
-    app.run(debug=True)
+   app.run(debug=True)
