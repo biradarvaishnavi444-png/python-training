@@ -1,28 +1,60 @@
- {% extends 'base.html' %}
+ {% extends "base.html" %}
 
 {% block content %}
 
-<div class="card shadow">
-    <div class="card-body">
+<h1 class="text-center mt-4">About Hostel Visitor Log System</h1>
 
-        <h2 class="text-primary">ℹ️ About Hostel Visitor Management System</h2>
+<p class="text-center mt-3">
+    The Hostel Visitor Log System is a secure and user-friendly application
+    developed to maintain visitor records digitally. It helps wardens and
+    administrators manage visitor entries efficiently, improve hostel security,
+    and replace manual paper registers with a modern digital system.
+</p>
 
-        <p>
-            This project is developed using Flask and Bootstrap.
-            It helps manage hostel visitor records efficiently.
-        </p>
+<div class="row mt-5">
 
-        <h5>✨ Features</h5>
-
-        <ul>
-            <li>👤 Add Visitor</li>
-            <li>📋 View Visitor Records</li>
-            <li>✅ Form Validation</li>
-            <li>🔔 Flash Messages</li>
-            <li>🎨 Bootstrap Responsive Design</li>
-        </ul>
-
+    <div class="col-md-4 mb-4">
+        <div class="card shadow text-center p-3">
+            <h4>➕ Add Visitor</h4>
+            <p>Add visitor details quickly and securely.</p>
+        </div>
     </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card shadow text-center p-3">
+            <h4>📋 Visitor Records</h4>
+            <p>View and manage visitor records easily.</p>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card shadow text-center p-3">
+            <h4>🔍 Search</h4>
+            <p>Search visitor records instantly.</p>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card shadow text-center p-3">
+            <h4>🎯 Filter</h4>
+            <p>Filter visitor records by purpose or date.</p>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card shadow text-center p-3">
+            <h4>🔒 Secure Login</h4>
+            <p>Only authorized users can access the system.</p>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card shadow text-center p-3">
+            <h4>📊 Reports</h4>
+            <p>Generate visitor reports efficiently.</p>
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}
