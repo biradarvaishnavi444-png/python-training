@@ -30,38 +30,35 @@ footer {
 
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-        <a class="navbar-brand" href="/">🏠 Hostel Visitor Log System </a>
+        <a class="navbar-brand" href="/">🏠 Hostel Visitor Log System </a> 
 
         <div>
-            <div class="ms-auto d-flex align-items-center" style="display:flex;gap:40px;">
+        <div class="ms-auto d-flex align-items-center" style="display:flex;gap:40px;">
+
+               <a class="nav-link" href="/">🏠 Home </a>
+    
+               {% if not session.username %}
+               <a class="nav-link" href="/login">🔐 Login </a>
+               {% endif %}
                 
-                <a class="nav-link " href="/">🏠 Home </a>
-                <a class="nav-link " href="/records">📋 Records </a>
-                <a class="nav-link " href="/about">  ℹ️ About </a>
-                {% if session.role == 'admin'%}
+               <a class="nav-link " href="/records">📋 Records </a>
+               <a class="nav-link " href="/about">  ℹ️ About </a>
                 <a class="nav-link " href="/add ">
                     ➕ Add Visitor
                 </a>
-                {% endif %}
-                <a class="nav-link " href="/filter">
+                 <a class="nav-link " href="/filter">
                     🔍 Filter
                 </a>
                 <form class="d-flex ms-3 ms-3" action="/search" method="GET">
                     <input class="form-control form-control-sm me-2" style="width:130px; height:35px" type="search" placeholder="Search" name="q">
                     <button class="btn btn-outline-light btn-sm" style="width:100px; height:35px" type="submit">Search</button>
                 </form>
-                {% if session.username %}
-                    <span class="nav-link px-2 py-1 text-white">👤 {{ session.username }}</span>
-                    <a class="nav-link " href="/logout">
-                        🔓 Logout
-                    </a>
-                {% else %}
-                    <a class="nav-link " href="/login">
-                        🔒 Login
-                    </a>
+                {% if session.username %}  
+                <span class="text-white">👤 {{ session.username }}</span>
+                <a class="nav-link" href="/logout">🔓 Logout </a>
                 {% endif %}
             </div>
-        </div>
+            </div>
             </div>
         </div>
     </div>
