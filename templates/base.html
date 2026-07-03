@@ -37,7 +37,7 @@ footer {
 
                <a class="nav-link" href="/">🏠 Home </a>
     
-               {% if not session.username %}
+               {% if not session.get('username')%}
                <a class="nav-link" href="/login">🔐 Login </a>
                {% endif %}
                 
@@ -53,8 +53,8 @@ footer {
                     <input class="form-control form-control-sm me-2" style="width:130px; height:35px" type="search" placeholder="Search" name="q">
                     <button class="btn btn-outline-light btn-sm" style="width:100px; height:35px" type="submit">Search</button>
                 </form>
-                {% if session.username %}  
-                <span class="text-white">👤 {{ session.username }}</span>
+                {% if session.get('username') %}  
+                <span class="text-white">👤 {{ session.get('username') }}</span>
                 <a class="nav-link" href="/logout">🔓 Logout </a>
                 {% endif %}
             </div>
