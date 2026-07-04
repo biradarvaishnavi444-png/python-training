@@ -1,13 +1,18 @@
+import os
 import sqlite3
 from flask import Flask, render_template, request, redirect, flash
 
 app = Flask(__name__)
 app.secret_key = 'Linkiwi2026'
 
+#Absoulute path - Always with app.py folder
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, 'Database.db')
+
 
 # Database Connection
 def get_db():
-    conn = sqlite3.connect('Database.db')
+    conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
 
