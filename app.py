@@ -59,6 +59,8 @@ def home():
 # =========================
 @app.route("/add", methods=["GET", "POST"])
 def add_visitor():
+    print(session)
+    
     if session.get('role') !='admin':
         flash("Admins only! You do not have permission","danger")
         return redirect('/')
