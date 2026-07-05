@@ -10,7 +10,7 @@ app.secret_key='Linkiwi2026'  # Necessary for flash messages
 # 1. DATABASE CONNECTION
 # =========================
 def get_db():
-    conn = sqlite3.connect("Database.db")
+    conn = sqlite3.connect("/home/vaishnavi11/Database.db")
     conn.row_factory = sqlite3.Row
     return conn
 
