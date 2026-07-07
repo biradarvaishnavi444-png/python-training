@@ -21,7 +21,8 @@ A web application built with Python and Flask.
 * Frontend: HTML, Bootstrap 5, JavaScript
 * Deployment: PythonAnywhere
 
-##  🚀 How to Run Locally
+## 🚀 How to Run Locally
+
 git clone https://github.com/biradarvaishnavi444-png/python-training.git 
 cd python-training 
 pip install -r requirements.txt 
