@@ -38,7 +38,10 @@ footer {
                <a class="nav-link" href="/">🏠 Home </a>
     
                {% if not session.get('username')%}
+               <li class="nav-item">
+                <a class="nav-link" href="/register">📝 Register </a>
                <a class="nav-link" href="/login">🔐 Login </a>
+                </li>
                {% endif %}
                 
                <a class="nav-link " href="/records">📋 Records </a>
@@ -53,9 +56,13 @@ footer {
                     <input class="form-control form-control-sm me-2" style="width:130px; height:35px" type="search" placeholder="Search" name="q">
                     <button class="btn btn-outline-light btn-sm" style="width:100px; height:35px" type="submit">Search</button>
                 </form>
-                {% if session.get('username') %}  
-                <span class="text-white">👤 {{ session.get('username') }}</span>
+                {% if session.get('username') %}
+                <li class="nav-item">
+                    <span class="text-white">👤 {{ session.get('username') }}</span>
                 <a class="nav-link" href="/logout">🔓 Logout </a>
+                </li>
+                {% endif %}
+                {% if session.get('username') == 'admin' %}
                 {% endif %}
             </div>
             </div>
