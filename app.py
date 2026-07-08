@@ -115,7 +115,7 @@ def delete_visitor(id):
 @app.route("/edit_visitor/<int:id>", methods=["GET", "POST"])
 def edit_visitor(id):
     if session.get('role') !='student':
-        flash(" You do not have permission","danger")
+        flash("Students only! You do not have permission","danger")
         return redirect('/')
 
 
