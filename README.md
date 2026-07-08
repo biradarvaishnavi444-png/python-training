@@ -24,6 +24,9 @@ A web application built with Python and Flask.
 ## 🚀 How to Run Locally
 
 git clone  https://github.com/biradarvaishnavi444-png/python-training.git
+
 cd python-training
+
 pip install -r requirements.txt
+
 python app.py
