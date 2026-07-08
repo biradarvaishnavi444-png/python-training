@@ -24,6 +24,6 @@ https://vaishnavi11.pythonanywhere.com/
  🚀 How to Run Locally
 
 git clone  https://github.com/biradarvaishnavi444-png/python-training.git
-cd TUMHARA_REPO
+cd python-training
 pip install -r requirements.txt
 python app.py

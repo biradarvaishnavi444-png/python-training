@@ -38,10 +38,7 @@ footer {
                <a class="nav-link" href="/">🏠 Home </a>
     
                {% if not session.get('username')%}
-               <li class="nav-item">
-                <a class="nav-link" href="/register">📝 Register </a>
                <a class="nav-link" href="/login">🔐 Login </a>
-                </li>
                {% endif %}
                 
                <a class="nav-link " href="/records">📋 Records </a>
@@ -62,8 +59,7 @@ footer {
                 <a class="nav-link" href="/logout">🔓 Logout </a>
                 </li>
                 {% endif %}
-                {% if session.get('username') == 'admin' %}
-                {% endif %}
+                
             </div>
             </div>
             </div>
