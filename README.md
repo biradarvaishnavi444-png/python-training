@@ -1,9 +1,10 @@
-#  🏠 Python-Training - Hostel Visitor Log System 
+# 🏠 Python-Training - Hostel Visitor Log System 
 
 A web application built with Python and Flask.
 
 ## 🔗 Live Demo
- https://vaishnavi11.pythonanywhere.com/
+
+https://vaishnavi11.pythonanywhere.com/
 
 ## 📋 Features
 
@@ -14,7 +15,7 @@ A web application built with Python and Flask.
 * Admin panel — only admins can add/edit/delete
 * Responsive design — works on mobile and desktop
 
- ## 🛠️ Tech Stack
+## 🛠️ Tech Stack
 
 * Backend: Python, Flask
 * Database: SQLite
@@ -23,7 +24,7 @@ A web application built with Python and Flask.
 
 ## 🚀 How to Run Locally
 
-git clone  https://github.com/biradarvaishnavi444-png/python-training.git
+[Clone the repository](https://github.com/biradarvaishnavi444-png/python-training.git)
 
 cd python-training
 
