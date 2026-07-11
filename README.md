@@ -1,10 +1,10 @@
-# 🏠 Python-Training - Hostel Visitor Log System 
+# 🏠 Python-Training - Hostel Visitor Log System
 
 A web application built with Python and Flask.
 
 ## 🔗 Live Demo
 
-https://vaishnavi11.pythonanywhere.com/
+[https://vaishnavi11.pythonanywhere.com/]
 
 ## 📋 Features
 
