@@ -1,2 +1,2 @@
- *.db
- _pycache_
+*.db
+__pycache__
