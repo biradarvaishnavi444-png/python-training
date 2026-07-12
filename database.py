@@ -6,7 +6,9 @@ app = Flask(__name__)
 app.secret_key = 'Linkiwi2026'
 
 #Absoulute path - Always with app.py folder
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 print (f"BASE_DIR: {BASE_DIR}")
+DB_PATH = os.path.join(BASE_DIR, "Database.db")
 print (f"DB_PATH: {DB_PATH}")
 
 
