@@ -94,8 +94,8 @@ def add_visitor():
 # =========================
 @app.route("/delete/<int:id>")
 def delete_visitor(id):
-    if session.get('role') !='admin':
-        flash("Admins only! You do not have permission","danger")
+    if session.get('role') !='student':
+        flash("! You do not have permission","danger")
         return redirect('/')
 
     conn = get_db()
