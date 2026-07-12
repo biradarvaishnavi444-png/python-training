@@ -22,6 +22,7 @@
 
     <thead class="table table-success table-striped">
         <tr>
+            <th>ID</th>
             <th>Visitor Name </th>
             <th>Student Name </th>
             <th>Room No </th>
@@ -35,6 +36,7 @@
     {% for visitor in visitors %}
 
     <tr>
+        <td>{{ visitor.id }}</td>
         <td>{{ visitor.visitor_name }}</td>
         <td>{{ visitor.student_name }}</td>
         <td>{{ visitor.room_no }}</td>
@@ -69,7 +71,7 @@
             searchInput.addEventListener('keyup', function() {
                 const query = this.value.toLowerCase();
                 allRows.forEach(function(row) {
-                    const name = row.dataset. name;
+                    const name = row.dataset.name;
 
                     if( name.includes(query)){
                         row.style.display = '';
