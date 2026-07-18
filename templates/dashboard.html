@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4fcfc;
+}
+
+.container{
+    width:90%;
+    margin:30px auto;
+}
+
+h1{
+    text-align:center;
+    color:#1e7f8a;
+    margin-bottom:30px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#fff;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align:center;
+}
+
+.card h3{
+    color:#555555;
+    margin-bottom:10px;
+}
+
+.card h2{
+    color:#2588eb;
+    font-size:40px;
+}
+
+.ai{
+    margin-top:30px;
+    background:#fff;
+    border-left:6px solid #25ebe8;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.ai h2{
+    color:#2563eb;
+    margin-bottom:15px;
+}
+
+.ai ul{
+    padding-left:20px;
+}
+
+.ai li{
+    margin-bottom:10px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>📊  Dashboard</h1>
+
+<div class="cards">
+
+<div class="card">
+<h3>👥 Total Visitors</h3>
+<h2>{{ total_visitors }}</h2>
+</div>
+
+<div class="card">
+<h3>📅 Today's Visitors</h3>
+<h2>{{ today_visitors }}</h2>
+</div>
+
+<div class="card">
+<h3>👤 Last Visitors</h3>
+<h2>{{ last_visitors }}</h2>
+</div>
+</div>
+
+<div class="ai">
+<h2>🤖 AI Insights</h2>
+
+<ul>
+<li> Visitor records are updated successfully.</li>
+<li>Check daily visitor activity regularly.</li>
+<li> Frequent visitors can be pre-registered.</li>
+<li> Keep visitor details updated for security.</li>
+</ul>
+
+</div>
+
+</div>
+
+</body>
+</html>
