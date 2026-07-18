@@ -53,9 +53,29 @@ def home():
 
     return render_template("home.html", visitors=visitors)
 
-
 # =========================
-# 4. INSERT (ADD VISITOR)
+# 4. DASHBOARD
+# =========================
+@app.route("/dashboard")
+def dashboard():
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM visitors")
+    total_visitors = cursor.fetchone()[0]
+
+
+    conn.close()
+
+    return render_template(
+        "dashboard.html",
+        total_visitors=total_visitors,
+        today_visitors=0,
+        last_visitors=0
+    )
+
+# ========================
+# 5. INSERT (ADD VISITOR)
 # =========================
 @app.route("/add", methods=["GET", "POST"])
 def add_visitor():
@@ -90,7 +110,7 @@ def add_visitor():
 
 
 # =========================
-# 5. DELETE
+# 6. DELETE
 # =========================
 @app.route("/delete/<int:id>")
 def delete_visitor(id):
@@ -110,7 +130,7 @@ def delete_visitor(id):
     return redirect("/")
 
 # =========================
-# 6. EDIT/UPDATE
+# 7. EDIT/UPDATE
 # =========================
 @app.route("/edit_visitor/<int:id>", methods=["GET", "POST"])
 def edit_visitor(id):
@@ -148,7 +168,7 @@ def edit_visitor(id):
     return render_template("edit_visitor.html", visitor=visitor)
 
 # =========================
-# 7. VIEW VISITOR
+# 8. VIEW VISITOR
 # =========================
 @app.route('/view/<int:id>')
 def view_visitor(id):
@@ -162,7 +182,7 @@ def view_visitor(id):
     return render_template("view.html" , visitor=visitor)
 
 # =========================
-# 8. RECORDS PAGE (OPTIONAL BUT PROFESSIONAL)
+# 9. RECORDS PAGE (OPTIONAL BUT PROFESSIONAL)
 # =========================
 @app.route("/records")
 def records():
@@ -178,7 +198,7 @@ def records():
 
     return render_template("records.html", visitors=visitors)
 #  =========================
-#  9. SEARCH 
+#  10. SEARCH 
 #  =========================
 
 @app.route("/search")
@@ -202,7 +222,7 @@ def search():
     return render_template("search.html", visitors=visitors, query=q)
 
 # =======================
-# 10. FILTER
+# 11. FILTER
 # =======================
 
 @app.route('/filter')
@@ -243,7 +263,7 @@ def filter_students():
         selected_purpose=purpose
     )
 # =====================
-# 11. ABOUT 
+# 12. ABOUT 
 # =====================
 
 @app.route("/about")
@@ -251,7 +271,7 @@ def about():
     return render_template("about.html")
 
 # =========================
-# 12.REGISTER 
+# 13.REGISTER 
 # =========================
 
 @app.route('/register', methods=['GET', 'POST'])
