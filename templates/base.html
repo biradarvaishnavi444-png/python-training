@@ -27,39 +27,55 @@ footer {
 </style>
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
         <a class="navbar-brand" href="/">🏠 Hostel Visitor Log System </a> 
 
         <div>
         <div class="ms-auto d-flex align-items-center" style="display:flex;gap:40px;">
-
+        <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav me-auto align-items-lg-center">
+                    <li class="nav-item">
                <a class="nav-link" href="/">🏠 Home </a>
-    
+                    </li>
+                <li class="nav-item"> 
                {% if not session.get('username')%}
                <a class="nav-link" href="/login">🔐 Login </a>
                {% endif %}
-                
+                </li>
+               <li class="nav-item"> 
+                <a class="nav-link" href="/dashboard">📊 Dashboard</a>
+                </li>
+                <li class="nav-item">
                <a class="nav-link " href="/records">📋 Records </a>
+                </li>
+                <li class="nav-item">
                <a class="nav-link " href="/about">  ℹ️ About </a>
+                </li> 
+                <li class="nav-item">
                 <a class="nav-link " href="/add ">
                     ➕ Add Visitor
                 </a>
+                </li>
+                <li class="nav-item">
                  <a class="nav-link " href="/filter">
                     🔍 Filter
                 </a>
+                </li>
+                <li class="nav-item"> 
                 <form class="d-flex ms-3 ms-3" action="/search" method="GET">
                     <input class="form-control form-control-sm me-2" style="width:130px; height:35px" type="search" placeholder="Search" name="q">
                     <button class="btn btn-outline-light btn-sm" style="width:100px; height:35px" type="submit">Search</button>
                 </form>
+                </li> 
                 {% if session.get('username') %}
                 <li class="nav-item">
                     <span class="text-white">👤 {{ session.get('username') }}</span>
                 <a class="nav-link" href="/logout">🔓 Logout </a>
                 </li>
                 {% endif %}
-                
+                </ul>
+                </div> 
             </div>
             </div>
             </div>
@@ -74,11 +90,12 @@ footer {
     {% for message in messages %}
     <div class="alert alert-success">
         {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     {% endfor %}
     {% endif %}
     {% endwith %}
-
+    <!--Page content -INSIDE container-->
     {% block content %}
     {% endblock %}
 </div>
