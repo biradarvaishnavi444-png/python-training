@@ -21,9 +21,23 @@
             <p class ="border-bottom pb-2"><strong> 🎓Student Name:</strong> {{ visitor['student_name'] }}</p>
             <p class ="border-bottom pb-2"><strong> 🏠Room No:</strong> {{ visitor['room_no'] }}</p>
             <p class ="border-bottom pb-2"><strong> 🎯Purpose:</strong> {{ visitor['purpose'] }}</p>
-        </div>
+         <!-- AI Tips Section -->
+<div class="mb-3">
+    <h5 class="fw-bold">🤖 AI Recommendation</h5>
 
-        <div class="card-footerbg-white ">
+    {% if tip %}
+        <div class="alert alert-info">
+            {{ tip }}
+        </div>
+    {% else %}
+        <a href="{{ url_for('get_ai_tip', id=visitor['id']) }}" class="btn btn-primary">
+            Get AI Recommendation
+        </a>
+    {% endif %}
+</div>
+        
+
+        <div class="card-footer bg-white text-center">
             <a href="/records" class="btn btn-info">⬅️ Back to 📋 Records</a>
             <a href="/filter" class="btn btn-warning">⬅️ Back to 🔍 Filter</a>
         </div>
