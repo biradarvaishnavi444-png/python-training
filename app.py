@@ -1,6 +1,13 @@
+from http import client
+from click import prompt
 from flask import Flask, abort, redirect, render_template, request, flash, session , url_for
+from flask.cli import load_dotenv
 from database import get_db, init_db
+from groq import Groq
+import os
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
+from werkzeug.utils import secure_filename
 import sqlite3
 
 app = Flask(__name__)
@@ -81,8 +88,8 @@ def dashboard():
 def add_visitor():
     print(session)
     
-    if session.get('role') !='student':
-        flash( "You do not have permission","danger")
+    if session.get('role') !='admin':
+        flash( "Admins only! You do not have permission","danger")
         return redirect('/')
 
 
@@ -114,8 +121,8 @@ def add_visitor():
 # =========================
 @app.route("/delete/<int:id>")
 def delete_visitor(id):
-    if session.get('role') !='student':
-        flash("! You do not have permission","danger")
+    if session.get('role') !='admin':
+        flash("Admins only! You do not have permission","danger")
         return redirect('/')
 
     conn = get_db()
@@ -134,8 +141,8 @@ def delete_visitor(id):
 # =========================
 @app.route("/edit_visitor/<int:id>", methods=["GET", "POST"])
 def edit_visitor(id):
-    if session.get('role') !='student':
-        flash("Students only! You do not have permission","danger")
+    if session.get('role') !='admin':
+        flash("Admins only! You do not have permission","danger")
         return redirect('/')
 
 
@@ -170,20 +177,58 @@ def edit_visitor(id):
 # =========================
 # 8. VIEW VISITOR
 # =========================
+
 @app.route('/view/<int:id>')
 def view_visitor(id):
     conn = get_db()
     visitor = conn.execute("SELECT * FROM visitors WHERE id=?", (id,)).fetchone()
-
-    conn.execute("SELECT * FROM visitors WHERE id=?", (id,)).fetchone()
-
     conn.close()
 
-    return render_template("view.html" , visitor=visitor)
+    if visitor is None:
+        abort(404)
 
-# =========================
+    tip = get_ai_tip(id)  # Get AI tip for the visitor
+
+    return render_template("view.html", visitor=visitor )
+
+@app.route(('/view/<int:id>/tip'))
+def get_ai_tip(id):
+    conn = get_db()
+    visitor = conn.execute(
+        "SELECT * FROM visitors WHERE id = ?",
+        (id,)
+    ).fetchone()
+    conn.close()
+
+    if visitor is None:
+        abort(404)
+
+    prompt = f"""
+    Visitor Name: {visitor['visitor_name']}
+    Student Name: {visitor['student_name']}
+    Room Number: {visitor['room_no']}
+    Purpose: {visitor['purpose']}
+
+    Give one short and professional hostel security recommendation.
+    Keep the response within 2 lines.
+    """
+
+    client = Groq(api_key=os.getenv("GROQ_API_KEY",""))
+
+    response = client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
+
+    tip= response.choices[0].message.content  # Return the AI tip
+
+    return render_template("view.html", visitor=visitor, tip=tip)
+
+# =============================================
 # 9. RECORDS PAGE (OPTIONAL BUT PROFESSIONAL)
-# =========================
+# =============================================
 @app.route("/records")
 def records():
 
@@ -196,9 +241,10 @@ def records():
 
     conn.close()
 
-    return render_template("records.html", visitors=visitors)
-#  =========================
-#  10. SEARCH 
+    return render_template("records.html", visitors=visitors )
+
+# ==========================
+# SEARCH  
 #  =========================
 
 @app.route("/search")
@@ -270,9 +316,9 @@ def filter_students():
 def about():
     return render_template("about.html")
 
-# =========================
-# 13.REGISTER 
-# =========================
+# =============================
+# 13.REGISTER , LOGIN, LOGOUT
+# =============================
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -285,7 +331,7 @@ def register():
         existing = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
         if existing:
             flash('Username already exists!', 'danger')
-            conn.close()
+            conn.close()          
             return render_template('register.html')
         
         hashed = generate_password_hash(password)
@@ -324,6 +370,10 @@ def logout():
     session.pop('role', None)
     flash('You have been logged out.', 'info')
     return redirect(('/'))
+
+def page_not_found(e):
+    return render_template("404.html"), 404
+ 
        
 init_db()  # Initialize the database
 
