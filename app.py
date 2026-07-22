@@ -210,7 +210,7 @@ def get_ai_tip(id):
     Purpose: {visitor['purpose']}
 
     Give one short and professional hostel security recommendation.
-    Keep the response within 2 lines.
+    Keep the response within 3 lines.
     """
 
     client = Groq(api_key=os.getenv("GROQ_API_KEY",""))
