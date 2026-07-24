@@ -12,10 +12,11 @@
 </div>
 
 {% if query %}
-<div class = "alert alert-info justify-content-between align-items-center align-items-center">
+<div class ="alert alert-info d-flex justify-content-between align-items-center">
     <span>
         <strong>{{query}}</strong>
-        <strong>{{visitors|length}}</strong> results
+        <strong>{{visitors|length}}
+       </strong> results found.
     </span>
     <a href = "/search" class = "btn btn-secondary btn-sm">
     Clear
