@@ -4,10 +4,8 @@
 
 {% block content %}
 
-<h2 class="mb-3">Visitor Records</h2>
-
-<table class="table table-bordered table-striped table-hover shadow-sm">
- <!-- Live Search -->
+<h2 class="mb-3">Visitor Records</h2>       
+ <!--Live Search-->
 
 <div class ="mb-3">
     <input type ="text"
@@ -18,9 +16,9 @@
     <div id ="resultInfo"
     class="text-muted small mt-1"></div>
 </div>
- 
-
-    <thead class="table table-success table-striped">
+<table class="table table-bordered table-striped table-hover shadow-sm">
+    
+  <thead class="table table-success table-striped">
         <tr>
             <th>ID</th>
             <th>Visitor Name </th>
@@ -31,7 +29,7 @@
         </tr>
     </thead>
 
-    <tbody>
+    <tbody id="tableBody">
 
     {% for visitor in visitors %}
 
