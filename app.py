@@ -259,8 +259,9 @@ def search():
         visitors = conn.execute('''SELECT * FROM visitors
                                 WHERE visitor_name LIKE ? 
                                 OR student_name LIKE ?
-                                OR room_no LIKE ?''',
-                                (f'%{q}%', f'%{q}%', f'%{q}%')).fetchall()
+                                OR room_no LIKE ?
+                                OR purpose LIKE ?''',
+                                (f'%{q}%', f'%{q}%', f'%{q}%',f'%{q}%')).fetchall()
         
     else:
         visitors = conn.execute('SELECT * FROM visitors ORDER BY id DESC').fetchall()
