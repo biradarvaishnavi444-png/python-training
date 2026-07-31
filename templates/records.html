@@ -9,12 +9,10 @@
 
 <div class ="mb-3">
     <input type ="text"
-    id ="searchInput"
-    class ="form-control
-    form-control-lg"
-    placeholder="🔍Type to search visitors by name...">
-    <div id ="resultInfo"
-    class="text-muted small mt-1"></div>
+           id ="searchInput"
+           class ="form-control form-control-lg"
+           placeholder="🔍Type to search visitors by name...">
+    <div id ="resultInfo" class="text-muted small mt-1"></div>
 </div>
 <table class="table table-bordered table-striped table-hover shadow-sm">
     
@@ -33,7 +31,8 @@
 
     {% for visitor in visitors %}
 
-    <tr>
+    <tr
+    data-name="{{ visitor.student_name | lower }}">
         <td>{{ visitor.id }}</td>
         <td>{{ visitor.visitor_name }}</td>
         <td>{{ visitor.student_name }}</td>
@@ -66,14 +65,17 @@
 <script>
             const searchInput = document.getElementById('searchInput');
             const allRows = document.querySelectorAll('#tableBody tr');
+            const resultInfo = document.getElementById('resultInfo');
             
             searchInput.addEventListener('keyup', function() {
                 const query = this.value.toLowerCase();
+                let matchCount = 0;
                 allRows.forEach(function(row) {
-                    const name = row.dataset.name;
+                    const name = row.dataset.name || '';
 
                     if( name.includes(query)){
                         row.style.display = '';
+                        matchCount++;
                     } else {
                         row.style.display = 'none';
                     }
