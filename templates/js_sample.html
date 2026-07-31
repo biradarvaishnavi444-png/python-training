@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html>
     <head>
         <title> Live Search </title>
@@ -12,13 +12,13 @@
             <input type="text"
             id ="searchInput"
             class="form-control mb-3"
-            placeholder = "Type to search...">
+            placeholder ="Type to search...">
 
             <!-- Table -->
             <table class ="table table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th> Visitor Name</th>
+                        <th>Visitor Name</th>
                         <th>Student Name </th>
                         <th>Room No </th>
                         <th>Purpose</th>
@@ -65,7 +65,7 @@
             searchInput.addEventListener('keyup', function() {
                 const query = this.value.toLowerCase();
                 allRows.forEach(function(row) {
-                    const  name = row.dataset. name;
+                    const name = row.dataset.name;
 
                     if( name.includes(query)){
                         row.style.display = '';
