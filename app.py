@@ -230,18 +230,17 @@ def get_ai_tip(id):
 # 9. RECORDS PAGE (OPTIONAL BUT PROFESSIONAL)
 # =============================================
 @app.route("/records")
-def records():
-
+def records_page():
+    page = request.args.get('page', 1, type=int)
+    per_page = 5
+    offset = (page - 1) * per_page
     conn = get_db()
-
-    visitors = conn.execute("""
-        SELECT * FROM visitors
-        ORDER BY id ASC
-    """).fetchall()
-
+    visitors = conn.execute('SELECT * FROM visitors ORDER BY id ASC LIMIT ? OFFSET ?', (per_page, offset)).fetchall()
+    total = conn.execute('SELECT COUNT(*) FROM visitors').fetchone()[0]
     conn.close()
+    total_pages = (total + per_page - 1) // per_page  # Calculate total pages
+    return render_template("records.html", visitors=visitors, page=page, total_pages=total_pages)
 
-    return render_template("records.html", visitors=visitors )
 
 # ==========================
 # SEARCH  
