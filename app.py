@@ -345,7 +345,7 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
+    if request.method =='POST':
         username = request.form['username'].strip()
         password = request.form['password']
         
@@ -356,6 +356,8 @@ def login():
         if user and check_password_hash(user['password'], password):
             session['username'] = username
             session['role'] = user['role']
+            print("SESSION:",dict(session))
+            print("ROLE:",user['role'])
             flash(f'Welcome {username}!', 'success')
             return redirect(('/'))
         else:
