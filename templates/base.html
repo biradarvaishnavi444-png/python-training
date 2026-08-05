@@ -68,7 +68,7 @@ footer {
                 <li class="nav-item">
                     <a class="nav-link" href="/about">ℹ️ About</a>
                 </li>
-                {% if session.role == 'admin' %}
+                {% if session.get('role') =='admin'%}
                 <li class="nav-item">
                     <a class="nav-link" href="/add">➕ Add Visitor</a>
                 </li>
