@@ -1,3 +1,4 @@
+from fileinput import filename
 from http import client
 from click import prompt
 from flask import Flask, abort, redirect, render_template, request, flash, session , url_for
@@ -10,8 +11,21 @@ import os
 from werkzeug.utils import secure_filename
 import sqlite3
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(BASE_DIR, '.env'))  # Load environment variables from .env file
+ 
 app = Flask(__name__)
 app.secret_key='Linkiwi2026'  # Necessary for flash messages
+
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'uploads')
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Create the upload folder if it doesn't exist
+
+def allowed_file(filename):
+    #only allow certain file extensions
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # =========================
 # 1. DATABASE CONNECTION
@@ -86,8 +100,6 @@ def dashboard():
 # =========================
 @app.route("/add", methods=["GET", "POST"])
 def add_visitor():
-    print(session)
-    
     if session.get('role') !='admin':
         flash( "Admins only! You do not have permission","danger")
         return redirect('/')
@@ -100,20 +112,32 @@ def add_visitor():
         room_no = request.form["room_no"]
         purpose = request.form["purpose"]
 
+         #Add: handle photo upload
+        file = request.files.get('photo')
+        filename = 'default.png'  # Default photo
+        if file and file.filename and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        
         conn = get_db()
 
         conn.execute("""
-        INSERT INTO visitors (visitor_name, student_name, room_no, purpose)
-        VALUES (?, ?, ?, ?)
-        """, (visitor_name, student_name, room_no, purpose))
+        INSERT INTO visitors (visitor_name, student_name, room_no, purpose, photo)
+        VALUES (?, ?, ?, ?, ?)
+        """, (visitor_name, student_name, room_no, purpose, filename))
 
         conn.commit()
         conn.close()
-        flash("Visitor Added Successfully!")
+        # Print to terminal
+        print(f"Received new visitor: {visitor_name} for student: {student_name}, room: {room_no}, photo: {filename}")
+
+        # Flash message to user
+        flash(f"Visitor {visitor_name} added successfully!", "success")
 
         return redirect("/records")
 
     return render_template("add_visitor.html")
+
 
 
 # =========================
@@ -155,15 +179,22 @@ def edit_visitor(id):
         room_no = request.form["room_no"]
         purpose = request.form["purpose"]
 
+        # Add: handle photo upload
+        file = request.files.get('photo')
+        filename = 'default.png'  # Default photo
+        if file and file.filename and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
         conn.execute("""
             UPDATE visitors
-            SET visitor_name=?, student_name=?, room_no=?, purpose=?
+            SET visitor_name=?, student_name=?, room_no=?, purpose=?, photo=?
             WHERE id=?
-        """, (visitor_name, student_name, room_no, purpose, id))
+        """, (visitor_name, student_name, room_no, purpose, filename, id))
 
         conn.commit()
         conn.close()
-
+        flash(f'{visitor_name} updated successfully!', 'success')
         return redirect("/records")
 
     visitor = conn.execute("""
