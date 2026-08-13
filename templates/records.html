@@ -28,16 +28,26 @@
     </thead>
 
     <tbody id="tableBody">
+                    
 
     {% for visitor in visitors %}
 
-    <tr
-    data-name="{{ visitor.student_name | lower }}">
+    <tr data-name="{{ visitor.visitor_name | lower }}">
         <td>{{ visitor.id }}</td>
-        <td>{{ visitor.visitor_name }}</td>
+        <td>
+        {% if visitor.photo %}
+           <div class="d-flex align-items-center">
+                <img src="{{ url_for('static', filename='uploads/' ~ visitor.photo) }}"
+                     class="rounded-circle me-2"
+                     style="width:40px; height:40px; object-fit:cover;"
+                     alt="{{ visitor.visitor_name }}">
+                <span class="fw-bold">{{ visitor.visitor_name }}</span>
+        {% endif %}   
+            </div>  
+        </td>
         <td>{{ visitor.student_name }}</td>
         <td>{{ visitor.room_no }}</td>
-        <td>{{ visitor.purpose }}</td>
+        <td>{{ visitor.purpose }}</td> 
         <td>
             <a href="/view/{{ visitor.id }}"
                class="btn btn-sm btn-primary">
@@ -56,7 +66,6 @@
             
         </td>
     </tr>
-
     {% endfor %}
 
     </tbody>
