@@ -48,9 +48,17 @@ def init_db():
         conn.execute("ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'visitors'")
     except:
         pass
-
+     
+    try:
+       conn.execute("ALTER TABLE visitors ADD COLUMN photo TEXT DEFAULT 'default.png'")
+    except Exception:
+        # Column already exists
+        pass
+      
+     
     conn.commit()
     conn.close()
+    
 
 init_db()  # Initialize the database
 
