@@ -17,8 +17,6 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))  # Load environment variables from .
 app = Flask(__name__)
 app.secret_key='Linkiwi2026'  # Necessary for flash messages
 
-DB_PATH = os.path.join(BASE_DIR,"Database.db")
-
 UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'uploads')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -33,7 +31,7 @@ def allowed_file(filename):
 # 1. DATABASE CONNECTION
 # =========================
 def get_db():
-    conn = sqlite3.connect("DB_PATH")
+    conn = sqlite3.connect("Database,db")
     conn.row_factory = sqlite3.Row
     return conn
 
