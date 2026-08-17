@@ -82,7 +82,7 @@
                                class="btn btn-sm btn-primary">
                                 View
                             </a>
-                            {% if session.get('role')=='admin'%}
+                            {% if session.role == 'admin' %}
                             <a href="/edit_visitor/{{ visitor['id'] }}"
                                class="btn btn-sm btn btn-sm btn-warning me-2">
                                  Edit
