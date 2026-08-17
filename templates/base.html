@@ -68,7 +68,7 @@ footer {
                 <li class="nav-item">
                     <a class="nav-link" href="/about">ℹ️ About</a>
                 </li>
-                {% if session.get('role')=='admin'%}
+                {% if session.role == 'admin' %}
                 <li class="nav-item">
                     <a class="nav-link" href="/add">➕ Add Visitor</a>
                 </li>
@@ -91,7 +91,7 @@ footer {
                     </form>
                 </li>
 
-                {% if session.get('username') %}
+                {% if session.username %}
                 <li class="nav-item">
                     <span class="text-white me-2">👤 {{ session.get('username') }}</span>
                 </li>
