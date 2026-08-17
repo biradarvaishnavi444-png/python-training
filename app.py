@@ -101,7 +101,7 @@ def dashboard():
 @app.route("/add", methods=["GET", "POST"])
 def add_visitor():
     if session.get('role') !='admin':
-        flash( "Admins only! You do not have permission","danger")
+        flash( "Admins only! You do not have permission", "danger")
         return redirect('/')
 
 
@@ -146,7 +146,7 @@ def add_visitor():
 @app.route("/delete/<int:id>")
 def delete_visitor(id):
     if session.get('role') !='admin':
-        flash("Admins only! You do not have permission","danger")
+        flash("Admins only! You do not have permission", "danger")
         return redirect('/')
 
     conn = get_db()
@@ -166,7 +166,7 @@ def delete_visitor(id):
 @app.route("/edit_visitor/<int:id>", methods=["GET", "POST"])
 def edit_visitor(id):
     if session.get('role') !='admin':
-        flash("Admins only! You do not have permission","danger")
+        flash("Admins only! You do not have permission", "danger")
         return redirect('/')
 
 
