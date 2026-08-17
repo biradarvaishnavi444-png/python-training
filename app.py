@@ -31,7 +31,7 @@ def allowed_file(filename):
 # 1. DATABASE CONNECTION
 # =========================
 def get_db():
-    conn = sqlite3.connect("Database,db")
+    conn = sqlite3.connect("Database.db")
     conn.row_factory = sqlite3.Row
     return conn
 
