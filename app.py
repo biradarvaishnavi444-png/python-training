@@ -39,9 +39,11 @@ def get_db():
 # =========================
 # 2. INIT DATABASE
 # =========================
+
 def init_db():
     conn = get_db()
 
+    # Visitors Table
     conn.execute("""
     CREATE TABLE IF NOT EXISTS visitors(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -52,11 +54,18 @@ def init_db():
     )
     """)
 
+    # Users Table
+    conn.execute("""
+    CREATE TABLE IF NOT EXISTS users(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL,
+        role TEXT DEFAULT 'student'
+    )
+    """)
+
     conn.commit()
     conn.close()
-
-init_db()
-
 
 # =========================
 # 3. SELECT (HOME PAGE)
