@@ -253,7 +253,7 @@ def get_ai_tip(id):
         ]
     )
 
-    tip= response.choices[0].message.content  # Return the AI tip
+    tip = response.choices[0].message.content  # Return the AI tip
 
     return render_template("view.html", visitor=visitor, tip=tip)
 
@@ -387,12 +387,22 @@ def login():
         if user and check_password_hash(user['password'], password):
             session['username'] = username
             session['role'] = user['role']
-            print("SESSION:",dict(session))
-            print("ROLE:",user['role'])
+            print("========== LOGIN DEBUG ==========")
+            print("USERNAME:", username)
+            print("DATABASE ROLE:", user['role'])
+            print("SESSION:", dict(session))
+            print("=================================")
             flash(f'Welcome {username}!', 'success')
-            return redirect(('/'))
+            return redirect('/')
         else:
-            flash('Invalid username or password', 'danger')
+              print("LOGIN FAILED")
+              flash('Invalid username or password', 'danger')
+              print("SESSION:",dict(session))
+              print("ROLE:",user['role'])
+              flash(f'Welcome {username}!', 'success')
+              return redirect(('/'))
+        
+            
     return render_template('login.html')
 
 @app.route('/logout')
